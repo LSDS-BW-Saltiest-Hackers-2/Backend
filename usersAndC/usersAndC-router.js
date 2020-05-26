@@ -40,7 +40,7 @@ router.put("/:id", (req, res) => {
   });
 });
 
-Comment.post("/", (req, res) => {
+router.post("/", (req, res) => {
   Comment.add(req.body).then((comment) => {
     res.status(201).json(comment);
   });

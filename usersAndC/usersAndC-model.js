@@ -4,7 +4,7 @@ const db = knex(require("../knexfile").development);
 module.exports = {
   get,
   getById,
-  insert,
+  add,
   update,
   remove,
 };
@@ -17,11 +17,12 @@ function getById(id) {
   return db("comment").where({ id }).first();
 }
 
-function insert(comment) {
+function add(comment) {
   return db("comment")
-    .insert(comment)
+    .insert(comment, "id")
     .then((ids) => {
-      return getById(ids[0]);
+      const [id] = ids;
+      return getById(id);
     });
 }
 

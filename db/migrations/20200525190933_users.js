@@ -4,12 +4,22 @@ exports.up = function (knex) {
       tbl.increments();
       tbl.string("username", 128).notNullable().index();
       tbl.string("password", 255).notNullable();
+      tbl
+        .integer("comment_id")
+        .unsigned()
+        .references("id")
+        .inTable("users_and_comment");
     })
     .createTable("comment", (tbl) => {
       tbl.increments();
       tbl.string("comment", 500).notNullable();
       tbl.integer("likes_total");
       tbl.timestamp("created_at").defaultTo(knex.fn.now());
+      tbl
+        .integer("child_id")
+        .unsigned()
+        .references("id")
+        .inTable("commentPAndChild");
     })
     .createTable("users_and_comment", (tbl) => {
       tbl.increments();

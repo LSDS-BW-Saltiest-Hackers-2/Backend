@@ -36,6 +36,10 @@ module.exports = {
   production: {
     client: "pg", // npm i pg
     connection: pgConnection,
+    pool: {
+      min: 2,
+      max: 10,
+    },
     migrations: {
       directory: "./db/migrations",
     },

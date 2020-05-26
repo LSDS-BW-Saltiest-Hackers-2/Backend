@@ -22,12 +22,14 @@ exports.up = function (knex) {
         .integer("parent_id")
         .notNullable()
         .unsigned()
+
         .references("id")
         .inTable("commentChild");
       tbl
         .integer("child_id")
         .notNullable()
         .unsigned()
+        .update("CASCADE")
         .references("id")
         .inTable("comment");
     });

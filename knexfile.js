@@ -34,7 +34,7 @@ module.exports = {
   // heroku postgres
   production: {
     client: "sqlite3", // npm i pg
-    connection: pgConnection,
+    connection: "./db/usersAndC.db3",
     pool: {
       min: 2,
       max: 10,

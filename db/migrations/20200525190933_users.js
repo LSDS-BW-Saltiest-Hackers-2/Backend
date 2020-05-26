@@ -19,7 +19,7 @@ exports.up = function (knex) {
         .integer("child_id")
         .unsigned()
         .references("id")
-        .inTable("commentPAndChild");
+        .inTable("commentChild");
     })
     .createTable("users_and_comment", (tbl) => {
       tbl.increments();

@@ -11,7 +11,6 @@ exports.seed = function (knex) {
             "Cant Believe this happened huh? I cant believe you cant believe this happened.",
 
           likes_total: 2,
-          user_id: 1,
         },
         {
           id: 2,
@@ -19,21 +18,18 @@ exports.seed = function (knex) {
             "Oh yeah? Well I cant believe you cant believe that they cant believe this happened.",
 
           likes_total: 10,
-          user_id: 1,
         },
         {
           id: 3,
           comment: "This is crazytown.",
 
           likes_total: 7,
-          user_id: 2,
         },
         {
           id: 4,
           comment: "You are totes right. What even...",
 
           likes_total: 0,
-          user_id: 3,
         },
       ]);
     });

@@ -1,7 +1,6 @@
 require("dotenv").config();
 
-const pgConnection =
-  process.env.DATABASE_URL || "postgresql://postgres@localhost/";
+const pgConnection = process.env.DATABASE_URL;
 
 module.exports = {
   development: {
@@ -34,7 +33,7 @@ module.exports = {
 
   // heroku postgres
   production: {
-    client: "pg", // npm i pg
+    client: "sqlite3", // npm i pg
     connection: pgConnection,
     pool: {
       min: 2,

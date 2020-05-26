@@ -8,7 +8,9 @@ exports.up = function (knex) {
         .integer("comment_id")
         .unsigned()
         .references("id")
-        .inTable("users_and_comment");
+        .inTable("comment")
+        .update("CASCADE")
+        .delete("CASCADE");
     })
     .createTable("comment", (tbl) => {
       tbl.increments();
@@ -19,6 +21,8 @@ exports.up = function (knex) {
         .integer("child_id")
         .unsigned()
         .references("id")
+        .update("CASCADE")
+        .delete("CASCADE")
         .inTable("commentChild");
     })
     .createTable("users_and_comment", (tbl) => {
@@ -28,13 +32,13 @@ exports.up = function (knex) {
         .notNullable()
         .unsigned()
         .references("id")
-        .inTable("comment");
+        .inTable("users");
       tbl
         .integer("comment_id")
         .notNullable()
         .unsigned()
         .references("id")
-        .inTable("users");
+        .inTable("comment");
     });
 };
 

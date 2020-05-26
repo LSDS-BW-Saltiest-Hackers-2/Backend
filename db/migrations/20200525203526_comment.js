@@ -5,16 +5,8 @@ exports.up = function (knex) {
       tbl.string("comment", 500).notNullable();
       tbl.integer("likes_total");
       tbl.timestamp("created_at").defaultTo(knex.fn.now());
-      tbl
-        .integer("parent_id")
-        .unsigned()
-        .references("id")
-        .inTable("commentPAndChild");
-      tbl
-        .integer("user_id")
-        .unsigned()
-        .references("id")
-        .inTable("users_and_comment");
+      tbl.integer("parent_id").unsigned().references("id").inTable("comment");
+      tbl.integer("user_id").unsigned().references("id").inTable("users");
     })
     .createTable("commentPAndChild", (tbl) => {
       tbl.increments();
@@ -22,16 +14,14 @@ exports.up = function (knex) {
         .integer("parent_id")
         .notNullable()
         .unsigned()
-
         .references("id")
-        .inTable("commentChild");
+        .inTable("comment");
       tbl
         .integer("child_id")
         .notNullable()
         .unsigned()
-        .update("CASCADE")
         .references("id")
-        .inTable("comment");
+        .inTable("commentChild");
     });
 };
 

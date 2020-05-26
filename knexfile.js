@@ -10,12 +10,7 @@ module.exports = {
     connection: {
       filename: "./db/usersAndC.db3",
     },
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      },
-    },
+
     migrations: {
       directory: "./db/migrations",
     },
@@ -41,10 +36,6 @@ module.exports = {
   production: {
     client: "pg", // npm i pg
     connection: pgConnection,
-    pool: {
-      min: 2,
-      max: 10,
-    },
     migrations: {
       directory: "./db/migrations",
     },

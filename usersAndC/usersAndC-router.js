@@ -1,15 +1,19 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const express = require("express");
-const app = express();
+
+const server = express();
 const multer = require("multer");
 const upload = multer({ dest: "/public" });
+const Model = require("./usersAndC-model.js");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("dev"));
-app.use(express.static(__dirname + "/public"));
+server.use(express.json());
+server.use(isValid);
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(morgan("dev"));
+server.use(express.static(__dirname + "/public"));
 
 const storage = multer.diskStorage({
   destination: "../images",
@@ -21,7 +25,7 @@ const storage = multer.diskStorage({
   },
 });
 
-app.post(
+server.post(
   "/",
   upload.single("avatar", (req, res) => {
     if (!req.file) {
@@ -37,4 +41,11 @@ app.post(
     }
   })
 );
+
+function isValid(user) {
+  return Boolean(
+    user.username && user.password && typeof user.password === "string"
+  );
+}
+
 module.exports = router;

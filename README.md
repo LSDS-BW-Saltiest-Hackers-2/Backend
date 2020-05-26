@@ -13,7 +13,7 @@
 **/auth/register** - **POST** need to provide a username and password can only be alphanumeric.
 
 Example of what to input:
-![required fields for register](register.PNG)
+![required fields for register]("register.PNG")
 
 Example of response:
 ![response to register](registerRes.PNG)

@@ -15,11 +15,6 @@ exports.up = function (knex) {
       tbl.string("comment", 500).notNullable();
       tbl.integer("likes_total");
       tbl.timestamp("created_at").defaultTo(knex.fn.now());
-      tbl
-        .integer("child_id")
-        .unsigned()
-        .references("id")
-        .inTable("commentChild");
     })
     .createTable("users_and_comment", (tbl) => {
       tbl.increments();

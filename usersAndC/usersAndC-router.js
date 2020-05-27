@@ -94,6 +94,58 @@ router.delete("/:id/replies/:id", (req, res) => {
   });
 });
 
+//saved
+
+router.post("/comment/:id/saved-comments", (req, res) => {
+  const id = req.params.id;
+  Comment.getById(id).then((comment) => {
+    console.log(comment);
+    const sComment = {
+      comment_id: id,
+      user_id: comment.user_id,
+      username: comment.username,
+      commentSaved: comment.comment,
+    };
+    Comment.SaveComment(sComment)
+      .then((sc) => {
+        res.status(201).json(sc);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(401).json(err.message);
+      });
+  });
+});
+
+// router.post("/:id/saved-comments"), (req, res) => {
+//   const id = req.params.id;
+//   Comment.SaveComment(id.req.body)
+// }
+
+router.get("/:id/saved-comments", (req, res) => {
+  const id = req.params.id;
+  Comment.getByIdU(id).then((comment) => {
+    Comment.getSavedComments()
+      .then((comment) => {
+        res.status(200).json(comment);
+        console.log("comment", comment);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(401).json(err.message);
+      });
+  });
+});
+
+router.delete("/:id/saved-comments/:id", (req, res) => {
+  const id = req.params.id;
+  Comment.deleteSavedComments(id).then((comment) => {
+    res
+      .status(200)
+      .json({ message: "Your specified saved comment has been deleted" });
+  });
+});
+
 function isValid(user) {
   return Boolean(
     user.username && user.password && typeof user.password === "string"

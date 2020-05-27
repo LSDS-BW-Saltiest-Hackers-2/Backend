@@ -7,12 +7,16 @@ module.exports = {
   add,
   update,
   remove,
-
   getByIdReply,
   addReply,
   updateReply,
   removeReply,
   getRepliesTest,
+  SaveComment,
+  getSavedComments,
+  deleteSavedComments,
+  getByIdSaved,
+  getByIdU,
 };
 
 //comments
@@ -23,6 +27,12 @@ function get() {
 
 function getById(id) {
   return db("comment").where({ id }).first();
+}
+function getByIdU(id) {
+  return db("users").where({ id }).first();
+}
+function getByIdSaved(id) {
+  return db("SavedCommentsAndReplies").where({ id }).first();
 }
 
 function getByIdReply(id) {
@@ -71,4 +81,20 @@ function updateReply(id, changes) {
 
 function removeReply(id) {
   return db("commentChild").where("id", id).del();
+}
+
+function SaveComment(comment) {
+  return db("SavedCommentsAndReplies")
+    .insert(comment)
+    .then((ids) => {
+      return getByIdSaved(ids[0]);
+    });
+}
+
+function getSavedComments() {
+  return db("SavedCommentsAndReplies");
+}
+
+function deleteSavedComments(id) {
+  return db("SavedCommentsAndReplies").where("id", id).del();
 }

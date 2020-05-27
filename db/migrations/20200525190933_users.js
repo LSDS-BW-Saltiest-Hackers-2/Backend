@@ -24,7 +24,15 @@ exports.up = function (knex) {
         .update("CASCADE")
         .delete("CASCADE")
         .inTable("commentChild");
+      tbl
+        .integer("user_id")
+        .unsigned()
+        .references("id")
+        .inTable("users")
+        .update("CASCADE")
+        .delete("CASCADE");
     })
+
     .createTable("users_and_comment", (tbl) => {
       tbl.increments();
       tbl

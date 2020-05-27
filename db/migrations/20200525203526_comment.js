@@ -18,7 +18,6 @@ exports.up = function (knex) {
         .inTable("comment");
       tbl
         .integer("child_id")
-        .notNullable()
         .unsigned()
         .references("id")
         .inTable("commentChild");

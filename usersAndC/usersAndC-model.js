@@ -7,8 +7,15 @@ module.exports = {
   add,
   update,
   remove,
-  getChildComment,
+
+  getByIdReply,
+  addReply,
+  updateReply,
+  removeReply,
+  getRepliesTest,
 };
+
+//comments
 
 function get() {
   return db("comment");
@@ -18,6 +25,9 @@ function getById(id) {
   return db("comment").where({ id }).first();
 }
 
+function getByIdReply(id) {
+  return db("commentChild").where({ id }).first();
+}
 function add(comment) {
   return db("comment")
     .insert(comment)
@@ -34,9 +44,31 @@ function remove(id) {
   return db("comment").where("id", id).del();
 }
 
-function getChildComment(commentId) {
-  return db("comment as c")
-    .join("commentChild as cc", "cc.id", "c.comment_id")
-    .select("c.id", "c.comment", "cc.comment")
-    .where("c.comment_id", commentId);
+//replies
+
+// function getChildComment(commentId) {
+//   return db("comment as c")
+//     .join("commentChild as cc", "c.id", "cc.id")
+//     .select("*", "c.comment", "cc.comment")
+//     .where("cc.parent_id", commentId);
+// }
+
+function getRepliesTest(commentId) {
+  return db("commentChild").where("commentChild.parent_id", commentId);
+}
+
+function addReply(comment) {
+  return db("commentChild")
+    .insert(comment)
+    .then((ids) => {
+      return getByIdReply(ids[0]);
+    });
+}
+
+function updateReply(id, changes) {
+  return db("commentChild").where({ id }).update(changes);
+}
+
+function removeReply(id) {
+  return db("commentChild").where("id", id).del();
 }

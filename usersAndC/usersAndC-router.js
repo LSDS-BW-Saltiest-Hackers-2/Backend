@@ -46,6 +46,12 @@ router.post("/", (req, res) => {
   });
 });
 
+router.get("/:id/replies", (req, res) => {
+  const id = req.params.id;
+  Comment.getChildComment(id).then((comment) => {
+    res.status(200).json(comment);
+  });
+});
 function isValid(user) {
   return Boolean(
     user.username && user.password && typeof user.password === "string"

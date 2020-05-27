@@ -7,6 +7,7 @@ module.exports = {
   add,
   update,
   remove,
+  getChildComment,
 };
 
 function get() {
@@ -31,4 +32,11 @@ function update(id, changes) {
 
 function remove(id) {
   return db("comment").where("id", id).del();
+}
+
+function getChildComment(commentId) {
+  return db("comment as c")
+    .join("commentChild as cc", "cc.id", "c.comment_id")
+    .select("c.id", "c.comment", "cc.comment")
+    .where("c.comment_id", commentId);
 }

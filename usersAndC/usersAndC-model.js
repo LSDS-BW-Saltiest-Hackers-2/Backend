@@ -19,10 +19,9 @@ function getById(id) {
 
 function add(comment) {
   return db("comment")
-    .insert(comment, "id")
+    .insert(comment)
     .then((ids) => {
-      const [id] = ids;
-      return getById(id);
+      return getById(ids[0]);
     });
 }
 

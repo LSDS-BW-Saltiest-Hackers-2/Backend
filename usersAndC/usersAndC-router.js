@@ -106,6 +106,7 @@ router.post("/:id/comment/:id/saved-comments", (req, res) => {
         comment_id: id2,
         username: comment.UserName,
         commentSaved: comment.Comment,
+        Saltiness: comment.Saltiness,
       };
       Comment.SaveComment(sComment)
         .then((sc) => {

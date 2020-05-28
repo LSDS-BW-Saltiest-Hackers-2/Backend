@@ -15,6 +15,7 @@ exports.up = function (knex) {
       .notNullable()
       .references("username")
       .inTable("users");
+    tbl.integer("Saltiness");
   });
 };
 

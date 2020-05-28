@@ -117,11 +117,6 @@ router.post("/comment/:id/saved-comments", (req, res) => {
   });
 });
 
-// router.post("/:id/saved-comments"), (req, res) => {
-//   const id = req.params.id;
-//   Comment.SaveComment(id.req.body)
-// }
-
 router.get("/:id/saved-comments", (req, res) => {
   const id = req.params.id;
   Comment.getByIdU(id).then((comment) => {
@@ -143,6 +138,21 @@ router.delete("/:id/saved-comments/:id", (req, res) => {
     res
       .status(200)
       .json({ message: "Your specified saved comment has been deleted" });
+  });
+});
+
+router.put("/:id/comment/:id/saved-comments/", (req, res) => {
+  const id = req.params.id;
+  const id2 = req.params.id;
+  const data = req.body;
+  Comment.getByIdSaved(id).then((user) => {
+    Comment.updateSavedC(id2, {
+      commentSaved: data.commentSaved,
+    }).then((updated) => {
+      Comment.getByIdSaved(id2).then((comment) =>
+        res.status(200).json(comment)
+      );
+    });
   });
 });
 

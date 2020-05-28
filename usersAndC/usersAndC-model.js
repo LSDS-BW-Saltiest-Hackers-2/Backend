@@ -17,6 +17,7 @@ module.exports = {
   deleteSavedComments,
   getByIdSaved,
   getByIdU,
+  updateSavedC,
 };
 
 //comments
@@ -97,4 +98,8 @@ function getSavedComments() {
 
 function deleteSavedComments(id) {
   return db("SavedCommentsAndReplies").where("id", id).del();
+}
+
+function updateSavedC(id, changes) {
+  return db("SavedCommentsAndReplies").where({ id }).update(changes);
 }

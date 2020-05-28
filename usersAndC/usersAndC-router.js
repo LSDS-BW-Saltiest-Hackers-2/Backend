@@ -96,24 +96,27 @@ router.delete("/:id/replies/:id", (req, res) => {
 
 //saved
 
-router.post("/comment/:id/saved-comments", (req, res) => {
+router.post(":id/comment/:id/saved-comments", (req, res) => {
   const id = req.params.id;
-  Comment.getById(id).then((comment) => {
-    console.log(comment);
-    const sComment = {
-      comment_id: id,
-      user_id: comment.user_id,
-      username: comment.username,
-      commentSaved: comment.comment,
-    };
-    Comment.SaveComment(sComment)
-      .then((sc) => {
-        res.status(201).json(sc);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(401).json(err.message);
-      });
+  const id2 = req.params.id;
+  Comment.getByIdU(id).then((user) => {
+    Comment.getById(id2).then((comment) => {
+      console.log(comment);
+      const sComment = {
+        comment_id: id2,
+        user_id: comment.user_id,
+        username: comment.username,
+        commentSaved: comment.comment,
+      };
+      Comment.SaveComment(sComment)
+        .then((sc) => {
+          res.status(201).json(sc);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(401).json(err.message);
+        });
+    });
   });
 });
 

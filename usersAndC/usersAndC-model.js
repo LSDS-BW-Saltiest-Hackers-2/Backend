@@ -1,6 +1,6 @@
 const knex = require("knex");
 const db = knex(require("../knexfile").development);
-
+const dbDS = require("../db/dsConnection.js");
 module.exports = {
   get,
   getById,
@@ -18,6 +18,8 @@ module.exports = {
   getByIdSaved,
   getByIdU,
   updateSavedC,
+  getDS,
+  getByIdDS,
 };
 
 //comments
@@ -34,6 +36,9 @@ function getByIdU(id) {
 }
 function getByIdSaved(id) {
   return db("SavedCommentsAndReplies").where({ id }).first();
+}
+function getByIdDS(id) {
+  return dbDS("comments").where({ id }).first();
 }
 
 function getByIdReply(id) {
@@ -102,4 +107,8 @@ function deleteSavedComments(id) {
 
 function updateSavedC(id, changes) {
   return db("SavedCommentsAndReplies").where({ id }).update(changes);
+}
+
+function getDS() {
+  return dbDS("comments");
 }

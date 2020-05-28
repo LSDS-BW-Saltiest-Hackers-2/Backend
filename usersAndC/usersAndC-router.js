@@ -156,6 +156,22 @@ router.put("/:id/comment/:id/saved-comments/", (req, res) => {
   });
 });
 
+//ds
+
+router.get("/:id/Allcomments", (req, res) => {
+  const id = req.params.id;
+  Comment.getByIdU(id).then((user) => {
+    Comment.getDS()
+      .then((comment) => {
+        res.status(200).json(comment);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json(err.message);
+      });
+  });
+});
+
 function isValid(user) {
   return Boolean(
     user.username && user.password && typeof user.password === "string"

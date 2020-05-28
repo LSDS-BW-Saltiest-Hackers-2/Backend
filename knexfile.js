@@ -46,4 +46,15 @@ module.exports = {
       directory: "./db/seeds",
     },
   },
+
+  datascience: {
+    client: "sqlite3",
+    connection: {
+      filename: "./db/demo_data.db3",
+    },
+    pool: {
+      min: 2,
+      max: 10,
+    },
+  },
 };

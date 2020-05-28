@@ -37,8 +37,8 @@ function getByIdU(id) {
 function getByIdSaved(id) {
   return db("SavedCommentsAndReplies").where({ id }).first();
 }
-function getByIdDS(id) {
-  return dbDS("comments").where({ id }).first();
+function getByIdDS(Comment_ID) {
+  return dbDS("comments").where({ Comment_ID }).first();
 }
 
 function getByIdReply(id) {

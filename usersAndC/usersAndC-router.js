@@ -104,7 +104,7 @@ router.post("/:id/comment/:id/saved-comments", (req, res) => {
       console.log(comment);
       const sComment = {
         comment_id: id2,
-        username: comment.userName,
+        username: comment.UserName,
         commentSaved: comment.Comment,
       };
       Comment.SaveComment(sComment)

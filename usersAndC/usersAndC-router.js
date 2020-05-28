@@ -100,7 +100,7 @@ router.post("/:id/comment/:id/saved-comments", (req, res) => {
   const id = req.params.id;
   const id2 = req.params.id;
   Comment.getByIdU(id).then((user) => {
-    Comment.getById(id2).then((comment) => {
+    Comment.getByIdDS(id2).then((comment) => {
       console.log(comment);
       const sComment = {
         comment_id: id2,

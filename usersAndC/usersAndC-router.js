@@ -96,7 +96,7 @@ router.delete("/:id/replies/:id", (req, res) => {
 
 //saved
 
-router.post(":id/comment/:id/saved-comments", (req, res) => {
+router.post("/:id/comment/:id/saved-comments", (req, res) => {
   const id = req.params.id;
   const id2 = req.params.id;
   Comment.getByIdU(id).then((user) => {

@@ -38,7 +38,7 @@ function getByIdSaved(id) {
   return db("SavedCommentsAndReplies").where({ id }).first();
 }
 function getByIdDS(Comment_ID) {
-  return dbDS("comments").where({ Comment_ID }).first();
+  return dbDS("Comments_salty").where({ Comment_ID }).first();
 }
 
 function getByIdReply(id) {
@@ -110,5 +110,5 @@ function updateSavedC(id, changes) {
 }
 
 function getDS() {
-  return dbDS("comments");
+  return dbDS("Comments_salty");
 }

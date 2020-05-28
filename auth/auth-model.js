@@ -15,7 +15,6 @@ function find() {
 }
 
 function findBy(filter) {
-  console.log("filter", filter);
   return db("users as u")
     .where(filter)
     .select("u.id", "u.username", "u.password")

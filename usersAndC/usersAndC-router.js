@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Comment = require("./usersAndC-model.js");
 const server = express();
-const stripHtml = require("string-strip-html");
 server.use(express.json());
 server.use(isValid);
 
@@ -110,7 +109,7 @@ router.post("/:id/comment/:id/saved-comments", (req, res) => {
       };
       Comment.SaveComment(sComment)
         .then((sc) => {
-          res.status(201).json(stripHtml(sc));
+          res.status(201).json(sc);
         })
         .catch((err) => {
           console.log(err);
@@ -125,7 +124,7 @@ router.get("/:id/saved-comments", (req, res) => {
   Comment.getByIdU(id).then((comment) => {
     Comment.getSavedComments()
       .then((comment) => {
-        res.status(200).json(stripHtml(comment));
+        res.status(200).json(comment);
         console.log("comment", comment);
       })
       .catch((err) => {

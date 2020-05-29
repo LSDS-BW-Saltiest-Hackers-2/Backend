@@ -174,6 +174,18 @@ router.get("/:id/Allcomments", (req, res) => {
   });
 });
 
+router.get("/:id/comment/:id/saved-comments/", (req, res) => {
+  const id = req.params.id;
+  const id2 = req.params.id;
+  Comment.getByIdU(id).then((comment) => {
+    Comment.getByIdSaved(id2)
+      .then((comment) => res.status(200).json(comment))
+      .catch((err) => {
+        console.log(err);
+        res.status(401).json(err.message);
+      });
+  });
+});
 function isValid(user) {
   return Boolean(
     user.username && user.password && typeof user.password === "string"
